@@ -13,11 +13,13 @@ public class App extends JFrame {
     GameArea ga;
     Mino mino;
     Mino nextMino;
+    static GameArea ga2;
     // Appコンストラクタ(Appをインスタンス化した際に1回呼び出されるメソッド)
     public App() {
         // オブジェクトをインスタンス化してAppクラスフィールド（メンバ変数）へ追加
         this.mino = new Mino();
-        this.ga = new GameArea();
+        //this.ga = new GameArea();
+        this.ga = ga2;
         
         this.nextMino = new Mino();
         // スレッド呼び出し
@@ -39,12 +41,17 @@ public class App extends JFrame {
         int l = name.length();
         if(0 < l && l <= 16) {
             System.out.println("ようこそ" + name + "さん！"); 
-            GameArea player = new GameArea();
-            player.setName(name);
+            //GameArea player = new GameArea();
+            //player.setName(name);
+            ga2 = new GameArea();
+            ga2.setName(name);
+            
         } else {
             System.out.println("ゲスト");
-            GameArea player = new GameArea();
-            player.setName("ゲスト");
+            //GameArea player = new GameArea();
+            //player.setName("ゲスト");
+            ga2 = new GameArea();
+            ga2.setName(name);
         }
         
         System.out.println("EnterKeyを押してスタート！！");
