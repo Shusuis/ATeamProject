@@ -37,7 +37,7 @@ public class App extends JFrame {
         System.out.print("名前を入力してください:");
 
         Scanner sc = new Scanner(System.in);
-        String name = sc.next();
+        String name = sc.nextLine();
         
         
         // 名前入力においてのルール
@@ -54,7 +54,7 @@ public class App extends JFrame {
             //GameArea player = new GameArea();
             //player.setName("ゲスト");
             ga2 = new GameArea();
-            ga2.setName(name);
+            ga2.setName("ゲスト");
         }
         
         System.out.println("EnterKeyを押してスタート！！");

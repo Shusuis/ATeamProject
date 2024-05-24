@@ -9,6 +9,7 @@ public class GameArea { //15結合済み
     private int[][] bufferField;
     private int score = 0; 
     private int linecount = 0; 
+    private int allLinecount = 0;
     // private Mino mino;
     private String name;
 
@@ -100,7 +101,7 @@ public class GameArea { //15結合済み
             }
             System.out.println();
         }
-        System.out.println("消したライン数：" + linecount); 
+        System.out.println("消したライン数：" + allLinecount); 
         System.out.print("名前:" + name +"   ");
         System.out.println("スコア：" + score); 
 
@@ -201,8 +202,8 @@ public class GameArea { //15結合済み
                         bufferField[_y + 1][x] = bufferField[_y][x];
                     } // for end
                 }
-                this.linecount++; 
-
+                this.linecount++;
+                this.allLinecount++;
             } // if end
             isFill = true;
             // addScore(); //1行ごとに処理された
