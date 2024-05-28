@@ -135,30 +135,29 @@ public class Mino {
     }
 
     private void randSet() {
-        this.minoTypes = this.mino_I;
-        // switch (getMinoType()) {
-        //     case 1:
-        //         this.minoTypes = this.mino_I;
-        //         break;
-        //     case 2:
-        //         this.minoTypes = this.mino_O;
-        //         break;
-        //     case 3:
-        //         this.minoTypes = this.mino_S;
-        //         break;
-        //     case 4:
-        //         this.minoTypes = this.mino_Z;
-        //         break;
-        //     case 5:
-        //         this.minoTypes = this.mino_J;
-        //         break;
-        //     case 6:
-        //         this.minoTypes = this.mino_L;
-        //         break;
-        //     case 7:
-        //         this.minoTypes = this.mino_T;
-        //         break;
-        // }
+        switch (getMinoType()) {
+            case 1:
+                this.minoTypes = this.mino_I;
+                break;
+            case 2:
+                this.minoTypes = this.mino_O;
+                break;
+            case 3:
+                this.minoTypes = this.mino_S;
+                break;
+            case 4:
+                this.minoTypes = this.mino_Z;
+                break;
+            case 5:
+                this.minoTypes = this.mino_J;
+                break;
+            case 6:
+                this.minoTypes = this.mino_L;
+                break;
+            case 7:
+                this.minoTypes = this.mino_T;
+                break;
+        }
     }
 
 }
