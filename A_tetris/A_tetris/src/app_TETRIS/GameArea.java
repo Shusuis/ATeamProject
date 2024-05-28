@@ -2,7 +2,7 @@ package app_TETRIS;
 
 public class GameArea { //15結合済み
     private int fieldHight = 21;
-    private int fieldWidth = 12;
+    private int fieldWidth = 15;
     private int grandHight = 30; // 広めに確保
     private int grandWidth = 20; // 広めに確保
     private int[][] field;
@@ -86,7 +86,7 @@ public class GameArea { //15結合済み
             }
         }
         for (int y = 0; y < getFieldHight(); y++) {
-            bufferField[y][0] = bufferField[y][getFieldWidth() - 1] = 1;
+            bufferField[y][0] = bufferField[y][1] = bufferField[y][2] = bufferField[y][3] = bufferField[y][getFieldWidth() - 1] = 1;
         }
         for (int x = 0; x < getFieldWidth(); x++) {
             bufferField[getFieldHight() - 1][x] = 1;
@@ -96,8 +96,8 @@ public class GameArea { //15結合済み
     // スレッドに描画
     public void drawField() {
         for (int y = 0; y < getFieldHight(); y++) {
-            for (int x = 0; x < getFieldWidth(); x++) {
-                System.out.printf("%s", (field[y][x] == 1 ? "回" : "・"));
+            for (int x = 0; x < getFieldWidth() -3; x++) {
+                System.out.printf("%s", (field[y][x + 3] == 1 ? "回" : "・"));
             }
             System.out.println();
         }
@@ -109,8 +109,8 @@ public class GameArea { //15結合済み
 
     public void drawField(Mino nextMino) {
         for (int y = 0; y < getFieldHight(); y++) {
-            for (int x = 0; x < getFieldWidth(); x++) {
-                System.out.printf("%s", (field[y][x] == 1 ? "回" : "・"));
+            for (int x = 0; x < getFieldWidth() - 3; x++) {
+                System.out.printf("%s", (field[y][x + 3] == 1 ? "回" : "・"));
             }
             System.out.println();
         }

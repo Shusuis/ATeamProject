@@ -132,7 +132,7 @@ public class App extends JFrame {
         im.put(KeyStroke.getKeyStroke("UP"), "up");
         am.put("up", new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                if (!ga.isCollison(gt.getMino(), gt.getMino().getMinoX() + 1, gt.getMino().getMinoY(),
+                if (!ga.isCollison(gt.getMino(), gt.getMino().getMinoX(), gt.getMino().getMinoY(),
                         (gt.getMino().getMinoAngle() + 1) % gt.getMino().getMinoAngleSize())) {
                     //ga.rotation(mino);
                     //ga.drawFieldAndMino(mino, mino);
