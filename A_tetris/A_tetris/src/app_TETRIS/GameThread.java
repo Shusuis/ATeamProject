@@ -63,7 +63,7 @@ public class GameThread extends Thread {
                 this.nextMino = new Mino(); 
                 //nextMino.initMino(); 
             } else {
-                ga.eraseLine();
+                // ga.eraseLine();
                 // ga.addScore();
                 // ga.resetCount();
                 ga.initField();

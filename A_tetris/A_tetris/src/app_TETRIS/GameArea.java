@@ -107,6 +107,20 @@ public class GameArea { //15結合済み
 
     }
 
+    public void drawField(Mino nextMino) {
+        for (int y = 0; y < getFieldHight(); y++) {
+            for (int x = 0; x < getFieldWidth(); x++) {
+                System.out.printf("%s", (field[y][x] == 1 ? "回" : "・"));
+            }
+            System.out.println();
+        }
+        System.out.println("消したライン数：" + allLinecount); 
+        System.out.print("名前:" + name +"   ");
+        System.out.println("スコア：" + score); 
+        System.out.println("NextMino"); 
+        drawNextMino(nextMino);
+    }
+
     //fieldの下にnextMinoを出力
    public void drawNextMino(Mino nextMino) {
 
@@ -126,7 +140,7 @@ public class GameArea { //15結合済み
     public void drawFieldAndMino(Mino mino, Mino nextMino) {
         if (isCollison(mino)) {
             bufferFieldAddMino(mino);
-            // eraseLine();
+            eraseLine();
             // addScore(); //操作したタイミングでしか機能しない
             // resetCount();
             initField();
@@ -138,7 +152,7 @@ public class GameArea { //15結合済み
             // addScore();
             // resetCount();
         }
-        drawField();
+        drawField(nextMino);
         System.out.println();
        // resetCount();   //　点数が加算され続ける
     }
@@ -204,6 +218,7 @@ public class GameArea { //15結合済み
                 }
                 this.linecount++;
                 this.allLinecount++;
+                y = getFieldHight() - 1;
             } // if end
             isFill = true;
             // addScore(); //1行ごとに処理された

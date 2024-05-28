@@ -36,7 +36,7 @@ public class App extends JFrame {
         System.out.println("Tetris");
         System.out.print("名前を入力してください:");
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in, "Shift-JIS");
         String name = sc.nextLine();
         
         
