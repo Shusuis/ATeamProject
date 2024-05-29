@@ -10,8 +10,6 @@ public class GameArea { //15結合済み
     private int score = 0; 
     private int linecount = 0; 
     private int allLinecount = 0;
-    private Mino mino;
-    private Mino nextMino;
     private String name;
 
     public GameArea() {
