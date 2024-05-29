@@ -68,6 +68,13 @@ public class GameThread extends Thread {
     public GameTimer getTimer() {
         return this.timer;
     }
+
+    public void terminateGame() {
+        ga.drawField();
+        System.out.println("GameOver");
+        System.out.println(ga.getName() + "  あなたのスコア:" + ga.getScore());
+        System.exit(0);
+    }
     //public void nextMino(Mino nextMino){ 
       //  this.mino = nextMino;
     //}
@@ -82,6 +89,7 @@ public class GameThread extends Thread {
             if (timer.getRemainTimeSec() < 30) {
                 setConfused(true);
                 System.out.println("　操作反転中！！" );
+                if (timer.getRemainTimeSec() <= 0) {terminateGame();}
             }
 
             if (ga.isCollison(mino)) {
@@ -115,10 +123,7 @@ public class GameThread extends Thread {
             ga.drawNextMino(nextMino); 
             // ga.drawFieldAndMino(mino);
             if(mino.getMinoY() <= 1 && ga.isCollison(mino)){ 
-                ga.drawField();
-                System.out.println("GameOver");
-                System.out.println(ga.getName() + "  あなたのスコア:" + ga.getScore());
-                System.exit(0);
+                terminateGame();
             }
             try {
                 Thread.sleep(1000);
