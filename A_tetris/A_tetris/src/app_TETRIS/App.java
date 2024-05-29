@@ -180,5 +180,15 @@ public class App extends JFrame {
                 
             }
         });
+
+        im.put(KeyStroke.getKeyStroke("SPACE"), "s");
+        am.put("s", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                while (!ga.isCollison(gt.getMino(), gt.getMino().getMinoX(), gt.getMino().getMinoY() + 1, gt.getMino().getMinoAngle())) {
+                    ga.moveDown(gt.getMino());
+                }
+                ga.drawFieldAndMino(gt);
+            }
+        });
     }
 }
