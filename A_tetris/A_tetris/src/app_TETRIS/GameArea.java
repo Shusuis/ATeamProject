@@ -10,7 +10,8 @@ public class GameArea { //15結合済み
     private int score = 0; 
     private int linecount = 0; 
     private int allLinecount = 0;
-    // private Mino mino;
+    private Mino mino;
+    private Mino nextMino;
     private String name;
 
     public GameArea() {
@@ -153,6 +154,28 @@ public class GameArea { //15結合済み
             // resetCount();
         }
         drawField(nextMino);
+        System.out.println();
+       // resetCount();   //　点数が加算され続ける
+    }
+
+    public void drawFieldAndMino(GameThread gt) {
+        if (isCollison(gt.getMino())) {
+            bufferFieldAddMino(gt.getMino());
+            eraseLine();
+            // addScore(); //操作したタイミングでしか機能しない
+            // resetCount();
+            initField();
+            gt.getMino().initMino();
+            gt.setMino(gt.getNextMino());
+            gt.setNextMino(new Mino());
+        } else {
+            // eraseLine();
+            initField();
+            fieldAddMino(gt.getMino());
+            // addScore();
+            // resetCount();
+        }
+        drawField(gt.getNextMino());
         System.out.println();
        // resetCount();   //　点数が加算され続ける
     }

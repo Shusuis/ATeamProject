@@ -124,7 +124,8 @@ public class App extends JFrame {
                     //ga.moveDown(mino);
                     //ga.drawFieldAndMino(mino, mino);
                     ga.moveDown(gt.getMino());
-                    ga.drawFieldAndMino(gt.getMino(), gt.getNextMino());
+                    // ga.drawFieldAndMino(gt.getMino(), gt.getNextMino());
+                    ga.drawFieldAndMino(gt);
                 }
             }
         });
