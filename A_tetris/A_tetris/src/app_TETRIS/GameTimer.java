@@ -2,7 +2,7 @@ package app_TETRIS;
 
 public class GameTimer {
     private long startTime, currentTime, endTime;
-    private long limitTime = 1000000;
+    private long limitTime = 60000;
 
     public GameTimer() {
         this.startTime = this.currentTime = System.currentTimeMillis();

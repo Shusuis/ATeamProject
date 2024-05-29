@@ -9,6 +9,8 @@ public class GameThread extends Thread {
     private Mino mino;
     private Mino nextMino;
     private GameTimer timer;
+    private boolean confused = false;
+    private int changeMinoCount = 20;
 
     public GameThread() {
         this.mino = new Mino();
@@ -47,6 +49,25 @@ public class GameThread extends Thread {
         this.nextMino = nextMino;
     }
 
+    public boolean isConfused() {
+        return confused;
+    }
+
+    public void setConfused(boolean confused) {
+        this.confused = confused;
+    }
+
+    public int getChangeMinoCount() {
+        return changeMinoCount;
+    }
+
+    public void setChangeMinoCount(int changeMinoCount) {
+        this.changeMinoCount = changeMinoCount;
+    }
+
+    public GameTimer getTimer() {
+        return this.timer;
+    }
     //public void nextMino(Mino nextMino){ 
       //  this.mino = nextMino;
     //}
@@ -57,6 +78,12 @@ public class GameThread extends Thread {
             ga.moveDown(mino);
             System.out.println();
             System.out.println("残り時間： " + timer.getRemainTimeSec() + "秒");
+            System.out.println("残りミノ変更回数： " + getChangeMinoCount() + "回 ");
+            if (timer.getRemainTimeSec() < 30) {
+                setConfused(true);
+                System.out.println("　操作反転中！！" );
+            }
+
             if (ga.isCollison(mino)) {
                 // if(mino.getMinoY() <= 1){ 
                    
@@ -73,7 +100,14 @@ public class GameThread extends Thread {
                 // ga.eraseLine();
                 // ga.addScore();
                 // ga.resetCount();
+                Mino prevMino = new Mino();
+                prevMino.initMino(mino);
+                prevMino.convertIntoPrev();
+                while (!ga.isCollison(prevMino, prevMino.getMinoX(), prevMino.getMinoY() + 1, prevMino.getMinoAngle())) {
+                    ga.moveDown(prevMino);
+                }
                 ga.initField();
+                ga.fieldAddMino(prevMino);
                 ga.fieldAddMino(mino);
             }
             ga.drawField();
@@ -81,7 +115,7 @@ public class GameThread extends Thread {
             ga.drawNextMino(nextMino); 
             // ga.drawFieldAndMino(mino);
             if(mino.getMinoY() <= 1 && ga.isCollison(mino)){ 
-                   
+                ga.drawField();
                 System.out.println("GameOver");
                 System.out.println(ga.getName() + "  あなたのスコア:" + ga.getScore());
                 System.exit(0);

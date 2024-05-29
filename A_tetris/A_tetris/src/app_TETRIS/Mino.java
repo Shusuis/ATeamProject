@@ -74,6 +74,25 @@ public class Mino {
         randSet();
     }
 
+    // ミノコピー
+    public void initMino(Mino copy) {
+        this.y = copy.getMinoY();
+        this.x = copy.getMinoX();
+        this.setMinoType(copy.getMinoType());
+        this.setMinoAngle(copy.getMinoAngle());
+        this.randSet();
+    }
+
+    public void convertIntoPrev() {
+        for (int r = 0; r < this.getMinoSize(); r++) {
+            for (int c = 0; c < this.getMinoSize(); c++) {
+                if (this.minoTypes[this.minoAngle][r][c] == 1) {
+                    this.minoTypes[this.minoAngle][r][c] = 2;
+                }
+            }
+        }
+    }
+
     public int[][][] getMino() {
         return minoTypes;
     }
@@ -124,6 +143,10 @@ public class Mino {
 
     public void setMinoType() {
         this.minoType = rand.nextInt(7) + 1;
+    }
+
+    public void setMinoType(int minoType) {
+        this.minoType = minoType;
     }
 
     public void setMinoAngle() {
