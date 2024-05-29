@@ -103,24 +103,38 @@ public class GameArea { // 15結合済み
             }
             System.out.println();
         }
-        System.out.println("消したライン数：" + allLinecount);
+        System.out.println("##########################################");
+        System.out.print("消したライン数：" + allLinecount + "   ");
         System.out.print("名前:" + name + "   ");
         System.out.println("スコア：" + score);
+        System.out.println("##########################################");
 
     }
 
-    public void drawField(Mino nextMino) {
+    public void drawField(GameThread gt) {
+        System.out.println("\n\n\n\n\n\n\n");
         for (int y = 0; y < getFieldHight(); y++) {
             for (int x = 0; x < getFieldWidth() - 3; x++) {
                 System.out.printf("%s", (field[y][x + 3] == 1 ? "回" : field[y][x + 3] == 2 ? "口" : "・"));
             }
             System.out.println();
         }
-        System.out.println("消したライン数：" + allLinecount);
-        System.out.print("名前:" + name + "   ");
+        System.out.println("####################################################");
+        System.out.print("名前:" + name + "     ");
+        System.out.print("消したライン数：" + allLinecount + "     ");
         System.out.println("スコア：" + score);
+        System.out.print("残り時間：" + gt.getTimer().getRemainTimeSec() + "秒" + "     ");
+        System.out.println("残りミノ変更回数：" + gt.getChangeMinoCount() + "回");
         System.out.println("NextMino");
-        drawNextMino(nextMino);
+        drawNextMino(gt.getNextMino());
+        if (gt.getTimer().getRemainTimeSec() < 30) {
+            gt.setConfused(true);
+            System.out.println("　操作反転中！！");
+            if (gt.getTimer().getRemainTimeSec() <= 0) {
+                gt.terminateGame();
+            }
+        }
+        System.out.println("####################################################");
     }
 
     // fieldの下にnextMinoを出力
@@ -138,25 +152,25 @@ public class GameArea { // 15結合済み
     }
 
     // コントローラー用再描画メソッド
-    public void drawFieldAndMino(Mino mino, Mino nextMino) {
-        if (isCollison(mino)) {
-            bufferFieldAddMino(mino);
-            eraseLine();
-            // addScore(); //操作したタイミングでしか機能しない
-            // resetCount();
-            initField();
-            mino.initMino();
-        } else {
-            // eraseLine();
-            initField();
-            fieldAddMino(mino);
-            // addScore();
-            // resetCount();
-        }
-        drawField(nextMino);
-        System.out.println();
-        // resetCount(); // 点数が加算され続ける
-    }
+    // public void drawFieldAndMino(Mino mino, Mino nextMino) {
+    // if (isCollison(mino)) {
+    // bufferFieldAddMino(mino);
+    // eraseLine();
+    // // addScore(); //操作したタイミングでしか機能しない
+    // // resetCount();
+    // initField();
+    // mino.initMino();
+    // } else {
+    // // eraseLine();
+    // initField();
+    // fieldAddMino(mino);
+    // // addScore();
+    // // resetCount();
+    // }
+    // drawField(nextMino);
+    // System.out.println();
+    // // resetCount(); // 点数が加算され続ける
+    // }
 
     public void drawFieldAndMino(GameThread gt) {
         if (isCollison(gt.getMino())) {
@@ -170,21 +184,19 @@ public class GameArea { // 15結合済み
             gt.setNextMino(new Mino());
         } else {
             // eraseLine();
-            Mino prevMino = new Mino();
-            prevMino.initMino(gt.getMino());
-            prevMino.convertIntoPrev();
-            while (!isCollison(prevMino, prevMino.getMinoX(), prevMino.getMinoY() + 1, prevMino.getMinoAngle())) {
-                moveDown(prevMino);
-            }
             initField();
-            fieldAddMino(prevMino);
-            fieldAddMino(gt.getMino());
             // addScore();
             // resetCount();
         }
-        System.out.println("残り時間： " + gt.getTimer().getRemainTimeSec() + "秒");
-        System.out.println("残りミノ変更回数： " + gt.getChangeMinoCount() + "回");
-        drawField(gt.getNextMino());
+        Mino prevMino = new Mino();
+        prevMino.initMino(gt.getMino());
+        prevMino.convertIntoPrev();
+        while (!isCollison(prevMino, prevMino.getMinoX(), prevMino.getMinoY() + 1, prevMino.getMinoAngle())) {
+            moveDown(prevMino);
+        }
+        fieldAddMino(prevMino);
+        fieldAddMino(gt.getMino());
+        drawField(gt);
         System.out.println();
         // resetCount(); // 点数が加算され続ける
     }
