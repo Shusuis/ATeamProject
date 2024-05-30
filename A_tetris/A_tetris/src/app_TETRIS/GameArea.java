@@ -123,7 +123,7 @@ public class GameArea { // 15結合済み
         System.out.print("Name: " + name + "     ");
         System.out.print("Lines：" + allLinecount + "     ");
         System.out.println("Score：" + score);
-        System.out.print("Time：" + gt.getTimer().getRemainTimeSec() + "s" + "       ");
+        System.out.print("Time：" + gt.getTimer().getRemainTimeSec() + "s" + "     ");
         System.out.printf("Speed：%s\n", gt.getTimer().getRemainTimeSec() < 60 ? "High" : "Normal");
         System.out.println("ChangeNextMino(R key):" + gt.getChangeMinoCount() + "");
         System.out.println("NextMino:");
@@ -131,9 +131,6 @@ public class GameArea { // 15結合済み
         if (gt.getTimer().getRemainTimeSec() < 30) {
             gt.setConfused(true);
             System.out.println("　!! Input Reversal !!");
-            if (gt.getTimer().getRemainTimeSec() <= 0) {
-                gt.terminateGame();
-            }
         }
         System.out.println("####################################################");
     }

@@ -82,7 +82,17 @@ public class GameThread extends Thread {
     public void terminateGame() {
         ga.drawField(this);
         System.out.println("GameOver");
-        System.out.println(ga.getName() + "  あなたのスコア:" + ga.getScore());
+        System.out.println(ga.getName() + "'s final score:" + ga.getScore());
+        System.exit(0);
+    }
+
+    public void clearGame() {
+        //ga.drawField(this);
+        System.out.println("\n\nTime: 0s");
+        System.out.println("TIME UP!!");
+        System.out.println("GAME CLEAR!!");
+        System.out.println(ga.getName() + "'s final score:" + ga.getScore());
+        System.out.println("\n");
         System.exit(0);
     }
     // public void nextMino(Mino nextMino){
@@ -97,10 +107,13 @@ public class GameThread extends Thread {
     public void run() {
 
         while (true) {
-            if (timer.getRemainTimeSec() < 60) {
+            if (timer.getRemainTimeSec() > 60) {
+                this.sleepTime = 1000;
+            } else if (timer.getRemainTimeSec() > 0) {
                 this.sleepTime = 500;
             } else {
-                this.sleepTime = 1000;
+                clearGame();
+                System.exit(0);
             }
 
             if (isPaused()) {
