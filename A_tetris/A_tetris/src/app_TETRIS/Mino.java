@@ -56,7 +56,7 @@ public class Mino {
 
     public Mino() {
         this.rand = new Random();
-        this.y = -1;
+        this.y = 0;
         this.x = 8;
         setMinoType();
         setMinoAngle();
@@ -67,7 +67,7 @@ public class Mino {
 
     // 出現するミノ
     public void initMino() {
-        this.y = -1;
+        this.y = 0;
         this.x = 8;
         setMinoType();
         setMinoAngle();

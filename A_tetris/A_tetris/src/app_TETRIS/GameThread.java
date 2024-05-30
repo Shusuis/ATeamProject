@@ -11,6 +11,8 @@ public class GameThread extends Thread {
     private GameTimer timer;
     private boolean confused = false;
     private int changeMinoCount = 20;
+    private boolean paused = false;
+    private int sleepTime = 1000;
 
     public GameThread() {
         this.mino = new Mino();
@@ -69,6 +71,14 @@ public class GameThread extends Thread {
         return this.timer;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
     public void terminateGame() {
         ga.drawField(this);
         System.out.println("GameOver");
@@ -79,9 +89,30 @@ public class GameThread extends Thread {
     // this.mino = nextMino;
     // }
 
+    public synchronized void noti() {
+        notify();
+    }
+    
+
     public void run() {
 
         while (true) {
+            if (timer.getRemainTimeSec() < 60) {
+                this.sleepTime = 500;
+            } else {
+                this.sleepTime = 1000;
+            }
+
+            if (isPaused()) {
+                try {
+                    synchronized(this) {
+                        wait();
+                    }
+                } catch (InterruptedException exception) {}
+            } else {
+                
+            }
+            
 
             if (ga.isCollison(mino)) {
                 // if(mino.getMinoY() <= 1){
@@ -118,7 +149,7 @@ public class GameThread extends Thread {
                 terminateGame();
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(sleepTime);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
             }

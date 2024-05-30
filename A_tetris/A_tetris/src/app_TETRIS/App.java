@@ -34,7 +34,7 @@ public class App extends JFrame {
     // mainメソッド 1番最初に動く特別なメソッド
     public static void main(String[] args) throws Exception {
         System.out.println("Tetris");
-        System.out.print("名前を入力してください:");
+        System.out.print("your name:");
 
         Scanner sc = new Scanner(System.in, "Shift-JIS");
         String name = sc.nextLine();
@@ -43,26 +43,27 @@ public class App extends JFrame {
         // 名前入力においてのルール
         int l = name.length();
         if(0 < l && l <= 16) {
-            System.out.println("ようこそ" + name + "さん！"); 
+            System.out.println("Welcome, " + name + "!"); 
             //GameArea player = new GameArea();
             //player.setName(name);
             ga2 = new GameArea();
             ga2.setName(name);
             
         } else {
-            System.out.println("ゲスト");
+            System.out.println("Guest");
             //GameArea player = new GameArea();
             //player.setName("ゲスト");
             ga2 = new GameArea();
-            ga2.setName("ゲスト");
+            ga2.setName("Guest");
         }
         
-        System.out.println("EnterKeyを押してスタート！！");
+        System.out.println("Please hit EnterKey and start the game!");
         while ((System.in.read()) != '\n') ;
     
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new App().setVisible(true);
+                JFrame f = new App();
+                f.setVisible(true);
             }
         });
         sc.close();
@@ -177,7 +178,7 @@ public class App extends JFrame {
                     gt.setNextMino(new Mino());
                     gt.setChangeMinoCount(gt.getChangeMinoCount() - 1);
                 }
-                
+                ga.drawFieldAndMino(gt);
             }
         });
 
@@ -188,6 +189,20 @@ public class App extends JFrame {
                     ga.moveDown(gt.getMino());
                 }
                 ga.drawFieldAndMino(gt);
+            }
+        });
+
+        im.put(KeyStroke.getKeyStroke("P"), "p");
+        am.put("p", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (gt.isPaused()) {
+                    gt.setPaused(false);
+                    gt.noti();
+                } else {
+                    gt.setPaused(true);
+                }
+                
+                
             }
         });
     }

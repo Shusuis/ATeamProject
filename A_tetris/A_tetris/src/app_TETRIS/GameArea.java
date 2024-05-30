@@ -120,16 +120,17 @@ public class GameArea { // 15結合済み
             System.out.println();
         }
         System.out.println("####################################################");
-        System.out.print("名前:" + name + "     ");
-        System.out.print("消したライン数：" + allLinecount + "     ");
-        System.out.println("スコア：" + score);
-        System.out.print("残り時間：" + gt.getTimer().getRemainTimeSec() + "秒" + "     ");
-        System.out.println("残りミノ変更回数：" + gt.getChangeMinoCount() + "回");
-        System.out.println("NextMino");
+        System.out.print("Name: " + name + "     ");
+        System.out.print("Lines：" + allLinecount + "     ");
+        System.out.println("Score：" + score);
+        System.out.print("Time：" + gt.getTimer().getRemainTimeSec() + "s" + "       ");
+        System.out.printf("Speed：%s\n", gt.getTimer().getRemainTimeSec() < 60 ? "High" : "Normal");
+        System.out.println("ChangeNextMino(R key):" + gt.getChangeMinoCount() + "");
+        System.out.println("NextMino:");
         drawNextMino(gt.getNextMino());
         if (gt.getTimer().getRemainTimeSec() < 30) {
             gt.setConfused(true);
-            System.out.println("　操作反転中！！");
+            System.out.println("　!! Input Reversal !!");
             if (gt.getTimer().getRemainTimeSec() <= 0) {
                 gt.terminateGame();
             }
